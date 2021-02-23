@@ -66,10 +66,6 @@ INSTALLED_APPS = [
 # 'rest_email_auth',
 
 
-
-
-
-
 ]
 
 REST_EMAIL_AUTH = {
