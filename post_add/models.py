@@ -36,7 +36,7 @@ class PostAdd_Car(models.Model):
    delivery_area=models.CharField(max_length=255,blank=True)
    warrenty=models.CharField(max_length=6,choices=HOME_DELEVERY,blank=True)
    warrenty_period=models.CharField(max_length=255,blank=True)
-   contact = models.CharField(max_length=255,)
+   contact = models.CharField(max_length=255,blank=True)
 
    created_at = models.DateTimeField(auto_now_add=True)
 
