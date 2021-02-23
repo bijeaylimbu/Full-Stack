@@ -31,12 +31,11 @@ SECRET_KEY = 'l5(+-g%nua_^lo*gou%(_9*abqo1%fs%$!(tx5!apizmj5icwu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://djangowithreactjs.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 db_from_env = dj_database_url.config()
 
 # Application definition
-django_heroku.settings(locals())
 INSTALLED_APPS = [
     'django.contrib.admin',
      'django.contrib.auth',
