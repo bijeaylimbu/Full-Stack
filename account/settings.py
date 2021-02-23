@@ -311,8 +311,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS=True
 SECURE_HSTS_PRELOAD=True
 
 
-import django_heroku
-django_heroku.settings(locals())
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -341,4 +340,4 @@ SWAGGER_SETTINGS = {
 
 
 django_heroku.settings(locals())
-USE_X_FORWARDED_HOST=True
+# USE_X_FORWARDED_HOST=True
