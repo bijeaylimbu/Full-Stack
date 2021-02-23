@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ['https://djangowithreactjs.herokuapp.com']
 db_from_env = dj_database_url.config()
 
 # Application definition
-
+django_heroku.settings(locals())
 INSTALLED_APPS = [
     'django.contrib.admin',
      'django.contrib.auth',
