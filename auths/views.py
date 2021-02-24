@@ -12,6 +12,8 @@ from django.contrib.auth import login
 from django.contrib import messages
 from django_registration import views
 from django.contrib.auth import get_user_model
+
+
 User = get_user_model()
 from drf_yasg import openapi
 from rest_framework.authentication import TokenAuthentication
@@ -57,40 +59,41 @@ class RegisterAPIView(generics.GenericAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
-    # def post(self, request, *args, **kwargs):
-    #     serializer = self.get_serializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #
-    #     user = serializer.save()
-    #     return Response({
-    #
-    #         "user": UserSerializer(user, context=self.get_serializer_context()).data,
-    #         "token": AuthToken.objects.create(user)[1]
-    #     })
-
     def post(self, request, *args, **kwargs):
-        user = request.data
-
-        serializer = self.serializer_class(data=user)
-        # serializer = self.get_serializer(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        serializer.save()
-        user_data = serializer.data
-        user = User.objects.get(email=user_data['email'])
-        user.is_active=False
-        user.save()
-        token = RefreshToken.for_user(user).access_token
-        current_site = get_current_site(request).domain
-        relativeLink = reverse('email-verify')
-        absurl = 'http://' + current_site + relativeLink + "?token=" + str(token)
-        email_body = 'Hi ' + user.username + \
-                     ' Use the link below to verify your email \n' + absurl
-        data = {'email_body': email_body, 'to_email': user.email,
-                'email_subject': 'Verify your email'}
+        user = serializer.save()
 
-        Util.send_email(data)
-        return Response(user_data, status=status.HTTP_201_CREATED)
+        return Response({
+
+            "user": UserSerializer(user, context=self.get_serializer_context()).data,
+            # "token": AuthToken.objects.create(user)[1]
+        })
+
+    # def post(self, request, *args, **kwargs):
+    #     user = request.data
+    #
+    #     serializer = self.serializer_class(data=user)
+    #     # serializer = self.get_serializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #
+    #     serializer.save()
+    #     user_data = serializer.data
+    #     user = User.objects.get(email=user_data['email'])
+    #     user.is_active=False
+    #     user.save()
+    #     token = RefreshToken.for_user(user).access_token
+    #     current_site = get_current_site(request).domain
+    #     relativeLink = reverse('email-verify')
+    #     absurl = 'http://' + current_site + relativeLink + "?token=" + str(token)
+    #     email_body = 'Hi ' + user.username + \
+    #                  ' Use the link below to verify your email \n' + absurl
+    #     data = {'email_body': email_body, 'to_email': user.email,
+    #             'email_subject': 'Verify your email'}
+    #
+    #     Util.send_email(data)
+    #     return Response(user_data, status=status.HTTP_201_CREATED)
 
     # def register_user(request):
     #
