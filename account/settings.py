@@ -134,7 +134,7 @@ SITE_ID = 1
 
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -245,7 +245,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # AUTH_USER_MODEL = 'auths.UserProfile'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "live-static-files", "media-root")
+MEDIA_ROOT = os.path.join(BASE_DIR, "live-static-files", "static")
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -255,6 +255,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "live-static-files", "media-root")
 AUTHENTICATION_BACKENDS = ('auths.backend.EmailBackend',
                            "django.contrib.auth.backends.ModelBackend")
 
+
+STATICFILES_DIRS = (
+
+)
 
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
 # ACCOUNT_EMAIL_REQUIRED = True
