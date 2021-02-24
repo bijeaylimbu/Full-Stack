@@ -251,8 +251,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "live-static-files", "media-root")
 
 # ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 #
-# AUTHENTICATION_BACKENDS = ('auths.backend.EmailBackend',
-#                            "django.contrib.auth.backends.ModelBackend")
+
+AUTHENTICATION_BACKENDS = ('auths.backend.EmailBackend',
+                           "django.contrib.auth.backends.ModelBackend")
+
+
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
 # ACCOUNT_EMAIL_REQUIRED = True
 # ACCOUNT_USERNAME_REQUIRED = False
