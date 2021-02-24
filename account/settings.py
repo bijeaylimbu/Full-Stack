@@ -18,7 +18,7 @@ import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.conf import settings
-
+django_heroku.settings(locals())
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -37,6 +37,7 @@ db_from_env = dj_database_url.config()
 
 # Application definition
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
      'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -339,5 +340,5 @@ SWAGGER_SETTINGS = {
 }
 
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 # USE_X_FORWARDED_HOST=True
