@@ -18,7 +18,7 @@ import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.conf import settings
-django_heroku.settings(locals())
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -342,3 +342,5 @@ SWAGGER_SETTINGS = {
 
 # django_heroku.settings(locals())
 # USE_X_FORWARDED_HOST=True
+
+django_heroku.settings(locals())
