@@ -316,11 +316,11 @@ SECURE_HSTS_PRELOAD=True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'bijaylimbu11111@gmail.com'
-EMAIL_HOST_PASSWORD = 'bijay1111'
+EMAIL_HOST_USER = 'meroonlinebazarbusiness@gmail.com'
+EMAIL_HOST_PASSWORD = 'meroonlinebazar'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = "bijaylimbu11111@gmail.com"
+DEFAULT_FROM_EMAIL = "meroonlinebazarbusiness@gmail.com"
 
 
 # ADMINS = [('Bijay', EMAIL_HOST_USER)]
