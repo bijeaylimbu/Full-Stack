@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'l5(+-g%nua_^lo*gou%(_9*abqo1%fs%$!(tx5!apizmj5icwu'
 # SECRET_KEY=os.environ('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['https://djangowithreactjs.herokuapp.com']
 
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
 
     "rest_framework_swagger",
 'swagger_ui',
+'crispy_forms',
 
 
 
@@ -352,3 +353,20 @@ SWAGGER_SETTINGS = {
 # USE_X_FORWARDED_HOST=True
 
 django_heroku.settings(locals())
+
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(SETTINGS_PATH, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]

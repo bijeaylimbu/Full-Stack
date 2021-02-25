@@ -75,7 +75,6 @@ class RegisterAPIView(generics.GenericAPIView):
         user = request.data
 
         serializer = self.serializer_class(data=user)
-        # serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         serializer.save()
@@ -94,6 +93,7 @@ class RegisterAPIView(generics.GenericAPIView):
 
         Util.send_email(data)
         return Response(user_data, status=status.HTTP_201_CREATED)
+
 
     # def register_user(request):
     #
@@ -159,10 +159,28 @@ class VerifyEmail(generics.GenericAPIView):
                 user.save()
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             return Response({'email': 'Successfully activated'}, status=status.HTTP_200_OK)
+
         except jwt.ExpiredSignatureError :
+
+
+
             return Response({'error': 'Activation Expired'}, status=status.HTTP_400_BAD_REQUEST)
         except jwt.exceptions.DecodeError:
+
+
             return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
 
 
