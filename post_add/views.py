@@ -1,5 +1,5 @@
 from django.db.models import Q
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -32,9 +32,60 @@ class Filter(django_filters.FilterSet):
         models=PostAdd_Car
         fields={
 
-            'username':['icontains','iexact','gte','lte']
+            'name':['icontains','iexact','gte','lte']
         }
 
+
+class FilterBikes(django_filters.FilterSet):
+    # username=django_filters.CharFilter()
+
+    class Meta:
+        models=PostAdd_Bikes
+        fields={
+
+            'name':['icontains','iexact','gte','lte']
+        }
+
+class FilterComputer(django_filters.FilterSet):
+    # username=django_filters.CharFilter()
+
+    class Meta:
+        models=PostAdd_Computer
+        fields={
+
+            'name':['icontains','iexact','gte','lte']
+        }
+
+class FilterPhones(django_filters.FilterSet):
+    # username=django_filters.CharFilter()
+
+    class Meta:
+        models=PostAdd_Phones
+        fields={
+
+            'name':['icontains','iexact','gte','lte']
+        }
+
+
+class FilterLand(django_filters.FilterSet):
+    # username=django_filters.CharFilter()
+
+    class Meta:
+        models=PostAdd_LandHouse
+        fields={
+
+            'name':['icontains','iexact','gte','lte']
+        }
+
+class FilterFashion(django_filters.FilterSet):
+    # username=django_filters.CharFilter()
+
+    class Meta:
+        models=PostAdd_Fashion
+        fields={
+
+            'name':['icontains','iexact','gte','lte']
+        }
 
 
 
@@ -47,17 +98,17 @@ class PostAddViewset(viewsets.ModelViewSet):
 
     queryset = PostAdd_Car.objects.all()
     serializer_class = serializers.AddPostSerializer
-    permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
-    )
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (
+    #     permissions.IsAuthenticatedOrReadOnly,
+    # )
+    # permission_classes = (IsAuthenticated,)
     authentication_classes = (TokenAuthentication,)
 
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     permission_classes = (AllowAny,)
     filter_backends = [filters.SearchFilter]
-    search_fields = ['$username']
-    # filterset_class=Filter
+    search_fields = ['$name']
+    filterset_class=Filter
 
 
 
@@ -78,6 +129,36 @@ class PostAddViewset(viewsets.ModelViewSet):
         event = self.get_object(pk)
         event.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    # def view(request):
+    #     query = request.GET.get("query", None)
+    #     car = PostAdd_Car.objects.all()
+    #     phone = PostAdd_Phones.objects.all()
+    #     computer = PostAdd_Computer.objects.all()
+    #     fashion = PostAdd_Fashion.objects.all()
+    #     bikes = PostAdd_Bikes.objects.all()
+    #     land = PostAdd_LandHouse.objects.all()
+    #
+    #     if query:
+    #         car = car.filter(name__icontains=query)
+    #         phone = phone.filter(name__icontains=query)
+    #         computer = computer.filter(name__icontains=query)
+    #         fashion = fashion.filter(name__icontains=query)
+    #         bikes = bikes.filter(name__icontains=query)
+    #         land = land.filter(name__icontains=query)
+    #
+    #         return JsonResponse({"car": AddPostSerializer(instances=car, many=True).data,
+    #                              "bikes": AddBikesPostSerializer(instances=bikes, many=True).data,
+    #                              "phone": AddPhonesPostSerializer(instances=phone, many=True).data,
+    #                              "computer": AddComputerPostSerializer(instances=computer, many=True).data,
+    #                              "fashion": AddFashionPostSerializer(instances=fashion, many=True).data,
+    #                              "land": AddLandPostSerializer(instances=land, many=True).data
+    #
+    #                              }
+    #
+    #                             )
+
+
 
 
 
@@ -132,6 +213,10 @@ class PostAddViewsetBikes(viewsets.ModelViewSet):
 
     permission_classes = [IsAuthenticated]
     permission_classes = (AllowAny,)
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['$name']
+    filterset_class = FilterBikes
+
 
     def post(self, request, pk):
         serializer = AddBikesPostSerializer(data=request.data)
@@ -159,6 +244,9 @@ class PostAddViewsetComputer(viewsets.ModelViewSet):
 
     permission_classes = [IsAuthenticated]
     permission_classes = (AllowAny,)
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['$name']
+    filterset_class = FilterComputer
 
     def post(self, request, pk):
         serializer = AddComputerPostSerializer(data=request.data)
@@ -186,6 +274,9 @@ class PostAddViewsetPhones(viewsets.ModelViewSet):
 
     permission_classes = [IsAuthenticated]
     permission_classes = (AllowAny,)
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['$name']
+    filterset_class = FilterPhones
 
     def post(self, request, pk):
         serializer = AddPhonesPostSerializer(data=request.data)
@@ -213,6 +304,9 @@ class PostAddViewsetLand(viewsets.ModelViewSet):
 
     permission_classes = [IsAuthenticated]
     permission_classes = (AllowAny,)
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['$name']
+    filterset_class = FilterLand
 
     def post(self, request, pk):
         serializer = AddLandPostSerializer(data=request.data)
@@ -240,6 +334,9 @@ class PostAddViewsetFashion(viewsets.ModelViewSet):
 
     permission_classes = [IsAuthenticated]
     permission_classes = (AllowAny,)
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['$name']
+    filterset_class = FilterFashion
 
     def post(self, request, pk):
         serializer = AddFashionPostSerializer(data=request.data)

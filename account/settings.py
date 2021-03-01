@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'l5(+-g%nua_^lo*gou%(_9*abqo1%fs%$!(tx5!apizmj5icwu'
 # SECRET_KEY=os.environ('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['https://djangowithreactjs.herokuapp.com']
 
@@ -370,3 +370,7 @@ TEMPLATES = [
         },
     },
 ]
+
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = True
